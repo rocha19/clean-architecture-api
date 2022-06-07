@@ -13,3 +13,4 @@ uploads/*
 
 yarn-error.log
 yarn.lock
+globalConfig.json
