@@ -10,11 +10,6 @@ describe('User domain entity', () => {
     expect(error).toEqual(new Left(new InvalidEmailError()));
   });
   test('should not create user with invalid name (too few characters)', () => {
-    const invalidName = '0      ';
-    const error = User.create({ name: invalidName, email: 'any@email.com' });
-    expect(error.isLeft).toEqual(left(new InvalidNameError()).isLeft);
-  });
-  test('should not create user with invalid name (too few characters)', () => {
     const invalidName = '0       ';
     const error = User.create({ name: invalidName, email: 'any@email.com' });
     expect(error.isLeft).toEqual(left(new InvalidNameError()).isLeft);
