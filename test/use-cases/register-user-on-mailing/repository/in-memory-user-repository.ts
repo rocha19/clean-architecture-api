@@ -1,21 +1,30 @@
 import { UserData } from '../../../../src/entities/user-data';
-import { InMemoryUserRepository } from '../../../../src/use-cases/register-user-on-mailing/repository/in-memory-user-repository';
+import { UserRepository } from '../../../../src/use-cases/register-user-on-mailing/ports/user-repository';
 
-describe('In memory user repository', () => {
-  test('should return null if user is not found', async () => {
-    const users: UserData[] = [];
-    const userRepository = new InMemoryUserRepository(users);
-    const user = await userRepository.findUserByEmail('any@email.com');
-    expect(user).toBe('Method not implemented.');
-  });
+export class InMemoryUserRepository implements UserRepository {
+  private repository: UserData[];
+  constructor(repository: UserData[]) {
+    this.repository = repository;
+  }
+  async add(user: UserData): Promise<void> {
+    const exists = await this.exists(user);
+    if (!exists) {
+      this.repository.push(user);
+    }
+  }
+  async findUserByEmail(email: string): Promise<UserData> {
+    const found = this.repository.find(user => user.email === email);
+    return found || null;
+  }
 
-  test('should return user if it is found in the repository', async () => {
-    const users: UserData[] = [];
-    const name = 'any-name';
-    const email = 'any@email.com';
-    const userRepository = new InMemoryUserRepository(users);
-    userRepository.add({ name, email });
-    const user = await userRepository.findUserByEmail('any@email.com');
-    expect(user.name).toBe('any-name');
-  });
-});
+  async findAllUsers(): Promise<UserData[]> {
+    return this.repository;
+  }
+
+  async exists(user: UserData): Promise<boolean> {
+    if ((await this.findUserByEmail(user.email)) === null) {
+      return false;
+    }
+    return true;
+  }
+}
