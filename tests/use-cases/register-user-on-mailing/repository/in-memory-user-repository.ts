@@ -1,5 +1,5 @@
-import { InMemoryUserRepository } from '@/modules/api/use-cases/register-user-on-mailing/repository/in-memory-user-repository';
-import { UserData } from '@/modules/api/use-cases/register-user-on-mailing/user-data';
+import { InMemoryUserRepository } from 'src/modules/api/app/register-user-on-mailing/repository/in-memory-user-repository';
+import { UserData } from 'src/modules/api/app/register-user-on-mailing/user-data';
 
 describe('In memory user repository', () => {
   test('should return null if user is not found', async () => {

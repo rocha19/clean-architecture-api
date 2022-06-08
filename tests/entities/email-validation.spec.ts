@@ -1,4 +1,4 @@
-import { Email } from '../../src/modules/api/entities/email-valid';
+import { Email } from '../../src/modules/api/domain/email-valid';
 
 describe('Email validation', () => {
   test('should not accept empty strings', () => {

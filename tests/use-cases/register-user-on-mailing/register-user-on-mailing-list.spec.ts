@@ -1,4 +1,4 @@
-import { UserData } from '../../../src/modules/api/use-cases/register-user-on-mailing/user-data';
+import { UserData } from '../../../src/modules/api/app/register-user-on-mailing/user-data';
 
 describe('Register user on mailing list use case', () => {
   test('should add user with copmplete data to mailing list', async () => {
