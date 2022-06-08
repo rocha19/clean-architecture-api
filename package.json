@@ -4,8 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/main/server.js",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
     "dev": "node -r dotenv/config dist/main/server.js",
-    "test": "jest",
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test-verbose": "jest --passWithNoTests --runInBand",
+    "test-unit": "npm test -- --watch -c jest-unit-config.js",
+    "test-integration": "npm test -- --watch -c jest-integration-config.js",
+    "test-staged": "npm test -- --findRelatedTests",
+    "test-ci": "npm test -- --coverage",
+    "prepare": "husky install",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix"
   },
