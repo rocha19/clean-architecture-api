@@ -1,10 +1,10 @@
-import { UserRepository } from '../../../src/use-cases/register-user-on-mailing/ports';
-import { UserData } from '../../../src/entities';
-import { RegisterUserOnMailingList } from '../../../src/use-cases/register-user-on-mailing';
-import { InMemoryUserRepository } from './repository/in-memory-user-repository';
+import { UserRepository } from '@/use-cases/register-user-on-mailing/ports';
+import { UserData } from '@/entities';
+import { RegisterUserOnMailingList } from '@/use-cases/register-user-on-mailing';
+import { InMemoryUserRepository } from '@test/use-cases/register-user-on-mailing/repository';
 
 describe('Register user on mailing list use case', () => {
-  test('should add user with copmplete data to mailing list', async () => {
+  it('should add user with copmplete data to mailing list', async () => {
     const users: UserData[] = [];
     const repository: UserRepository = new InMemoryUserRepository(users);
     const useCase: RegisterUserOnMailingList = new RegisterUserOnMailingList(
@@ -20,7 +20,7 @@ describe('Register user on mailing list use case', () => {
     expect(user?.name).toBe('any-name');
     expect(response.value.name).toBe('any-name');
   });
-  test('should not add user with invalid email to mailing list', async () => {
+  it('should not add user with invalid email to mailing list', async () => {
     const users: UserData[] = [];
     const repository: UserRepository = new InMemoryUserRepository(users);
     const useCase: RegisterUserOnMailingList = new RegisterUserOnMailingList(
@@ -38,7 +38,7 @@ describe('Register user on mailing list use case', () => {
     expect(user).toBeNull();
     expect(response.name).toEqual('InvalidEmailError');
   });
-  test('should not add user with invalid name to mailing list', async () => {
+  it('should not add user with invalid name to mailing list', async () => {
     const users: UserData[] = [];
     const repository: UserRepository = new InMemoryUserRepository(users);
     const useCase: RegisterUserOnMailingList = new RegisterUserOnMailingList(

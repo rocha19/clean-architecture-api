@@ -1,15 +1,15 @@
-import { UserData } from '../../../../src/entities/user-data';
-import { InMemoryUserRepository } from './in-memory-user-repository';
+import { UserData } from '@/entities/user-data';
+import { InMemoryUserRepository } from '@test/use-cases/register-user-on-mailing/repository';
 
 describe('In memory User repository', () => {
-  test('should return null if user is not found', async () => {
+  it('should return null if user is not found', async () => {
     const users: UserData[] = [];
     const sut = new InMemoryUserRepository(users);
     const user = await sut.findUserByEmail('any@mail.com');
     expect(user).toBeNull();
   });
 
-  test('should return user if it is found in the repository', async () => {
+  it('should return user if it is found in the repository', async () => {
     const users: UserData[] = [];
     const name = 'any_name';
     const email = 'any@mail.com';
@@ -19,7 +19,7 @@ describe('In memory User repository', () => {
     expect(user.name).toBe('any_name');
   });
 
-  test('should return all users in the repository', async () => {
+  it('should return all users in the repository', async () => {
     const users: UserData[] = [
       { name: 'any_name', email: 'any@mail.com' },
       { name: 'second_name', email: 'second@mail.com' },
