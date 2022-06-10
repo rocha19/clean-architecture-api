@@ -12,7 +12,7 @@ describe('Register user on mailing list use case', () => {
     );
     const name = 'any-name';
     const email = 'any@email.com';
-    const response = await useCase.registerUserOnMailingList({
+    const response = await useCase.perform({
       name,
       email,
     });
@@ -29,7 +29,7 @@ describe('Register user on mailing list use case', () => {
     const name = 'any-name';
     const invalidEmail = 'invalid_email';
     const response = (
-      await useCase.registerUserOnMailingList({
+      await useCase.perform({
         name,
         email: invalidEmail,
       })
@@ -47,7 +47,7 @@ describe('Register user on mailing list use case', () => {
     const name = '';
     const invalidEmail = 'any@email.com';
     const response = (
-      await useCase.registerUserOnMailingList({
+      await useCase.perform({
         name,
         email: invalidEmail,
       })
