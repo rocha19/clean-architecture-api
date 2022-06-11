@@ -6,7 +6,7 @@ import { MissingParamError } from './errors/missing-param-error';
 
 export class RegisterUserController {
   constructor(private readonly usecase: UseCase) {}
-  public async handle(request: HttpRequest) {
+  public async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
       if (!request.body.name || !request.body.email) {
         let missingParam = !request.body.name ? 'name ' : '';
