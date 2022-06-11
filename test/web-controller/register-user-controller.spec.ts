@@ -6,7 +6,7 @@ import { UserRepository } from '@/use-cases/register-user-on-mailing/ports';
 import { MissingParamError } from '@/web-controllers/errors/missing-param-error';
 import { HttpRequest, HttpResponse } from '@/web-controllers/ports';
 import { RegisterUserController } from '@/web-controllers/register-user-controller';
-import { InMemoryUserRepository } from '@test/use-cases/register-user-on-mailing/repository';
+import { InMemoryUserRepository } from '@/use-cases/register-user-on-mailing/repository';
 
 describe('Sign up web controller', () => {
   class ErrorThrowingUseCaseStub implements UseCase {
