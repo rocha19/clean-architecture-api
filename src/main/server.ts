@@ -1,9 +1,14 @@
 import 'module-alias/register';
 import 'dotenv/config';
-import app from '@/main/config/app';
+import { MongoHelper } from '@/infra/repositories/mongodb/helper';
 
 const port = process.env.PORT;
-
-app.listen(port, () => {
-  console.log(`server running at http://localhost:${port}`);
-});
+const mongo = `${process.env.MONGO_URL}`;
+MongoHelper.connect(mongo)
+  .then(async () => {
+    const app = await (await import('./config/app')).default;
+    app.listen(port, () => {
+      console.log(`server running at http://localhost:${port}`);
+    });
+  })
+  .catch(console.error);
