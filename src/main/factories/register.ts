@@ -1,14 +1,20 @@
+import { MongodbUserRepository } from '@/infra/repositories/mongodb';
 import { RegisterUserOnMailingList } from '@/use-cases/register-user-on-mailing';
-import { RegisterUserController } from '@/web-controllers';
-import { InMemoryUserRepository } from '@/use-cases/register-user-on-mailing/repository';
 
-export const makeRegisterUserController = (): RegisterUserController => {
-  const inMemoryUserRepository = new InMemoryUserRepository([]);
-  const registerUserOnMailingListUseCase = new RegisterUserOnMailingList(
-    inMemoryUserRepository,
-  );
-  const registerUserController = new RegisterUserController(
-    registerUserOnMailingListUseCase,
-  );
-  return registerUserController;
-};
+export const makeRegisterAndSendEmailController =
+  (): RegisterAndSendEmailController => {
+    const mongoDbUserRepository = new MongodbUserRepository();
+    const registerUserOnMailingListUseCase = new RegisterUserOnMailingList(
+      mongoDbUserRepository,
+    );
+    const emailService = new NodemailerEmailService();
+    const sendEmailUseCase = new SendEmail(getEmailOptions(), emailService);
+    const registerAndSendEmailUseCase = new RegisterAndSendEmail(
+      registerUserOnMailingListUseCase,
+      sendEmailUseCase,
+    );
+    const registerUserController = new RegisterAndSendEmailController(
+      registerAndSendEmailUseCase,
+    );
+    return registerUserController;
+  };

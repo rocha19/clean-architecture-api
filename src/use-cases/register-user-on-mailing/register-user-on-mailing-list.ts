@@ -1,5 +1,5 @@
-import { InvalidNameError, InvalidEmailError } from '@/entities/errors';
-import { User, UserData } from '@/entities';
+import { InvalidNameError, InvalidEmailError } from '@/domain/errors';
+import { User, UserData } from '@/domain';
 import { Either, left, right } from '@/shared';
 import { UserRepository } from '@/use-cases/register-user-on-mailing/ports';
 import { UseCase } from '@/use-cases/ports';

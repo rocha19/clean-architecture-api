@@ -16,3 +16,7 @@ yarn.lock
 globalConfig.json
 
 coverage/
+src/web-controllers/
+test/web-controller/
+reactjs/
+src/infra/repositories/prisma/prisma-user-repository.ts
