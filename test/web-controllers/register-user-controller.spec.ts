@@ -1,9 +1,15 @@
 import { UserData } from '@/domain';
-import { Either } from '@/shared';
+import { InvalidEmailError, InvalidNameError } from '@/domain/errors';
+import { Either, right } from '@/shared';
+import { MailServiceError } from '@/use-cases/errors';
 import { UseCase } from '@/use-cases/ports';
+import { RegisterAndSendEmail } from '@/use-cases/register-and-send-email/register-and-send-email';
 import { RegisterUserOnMailingList } from '@/use-cases/register-user-on-mailing';
 import { UserRepository } from '@/use-cases/register-user-on-mailing/ports';
 import { InMemoryUserRepository } from '@/use-cases/register-user-on-mailing/repository';
+import { SendEmail } from '@/use-cases/send-email';
+import { EmailOptions, EmailService } from '@/use-cases/send-email/ports';
+import { RegisterAndSendEmailController } from '@/web-controllers';
 import { MissingParamError } from '@/web-controllers/errors/missing-param-error';
 import { HttpRequest, HttpResponse } from '@/web-controllers/ports';
 

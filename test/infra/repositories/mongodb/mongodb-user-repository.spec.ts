@@ -9,8 +9,8 @@ describe('Mongodb User repository', () => {
   afterAll(async () => {
     await MongoHelper.disconnect();
   });
-  beforeEach(() => {
-    MongoHelper.clearCollection('users');
+  beforeEach(async () => {
+    await MongoHelper.clearCollection('users');
   });
   it('when user is added, it shold exist', async () => {
     const userRepository = new MongodbUserRepository();

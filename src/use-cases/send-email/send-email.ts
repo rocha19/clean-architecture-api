@@ -1,4 +1,8 @@
+import { User } from '@/domain';
+import { Either } from '@/shared';
+import { MailServiceError } from '../errors';
 import { UseCase } from '../ports';
+import { EmailOptions, EmailService } from './ports';
 
 export class SendEmail implements UseCase {
   private readonly emailOptions: EmailOptions;
